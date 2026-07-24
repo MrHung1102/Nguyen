@@ -186,6 +186,8 @@ function recordFault(faultId){
   events.unshift({...fault,testId:activeId,at:now(),eventId:Date.now()});
   render();
 }
+window.beginExam=beginExam;
+window.recordFault=recordFault;
 function scoreData(){
   const terminal=events.some(e=>e.terminal);
   const deduction=events.reduce((s,e)=>s+(e.terminal?0:e.points),0);
