@@ -55,12 +55,12 @@
       <div class="start-card" id="startCard">
         <div class="road-icon">⌁</div><h2>Sẵn sàng bắt đầu phiên sát hạch</h2>
         <p>Hệ thống sẽ ghi thời gian và tự động tính điểm ngay khi lỗi được chọn.</p>
-        <button id="start" onclick="beginExam()">BẮT ĐẦU SÁT HẠCH <span>→</span></button>
+        <button id="start">BẮT ĐẦU SÁT HẠCH <span>→</span></button>
       </div>
       <div id="faultArea" hidden>
         <div class="section-label"><span>GHI NHẬN LỖI VI PHẠM</span><small>Chọn lỗi ngay khi phát hiện</small></div>
         <div class="fault-grid" id="faults"></div>
-        <button class="complete-test" id="completeTest" onclick="completeCurrentTest()">✓ HOÀN THÀNH BÀI</button>
+        <button class="complete-test" id="completeTest">✓ HOÀN THÀNH BÀI</button>
       </div>
     </section>
     <aside class="score-panel">
@@ -218,12 +218,12 @@ function scoreData(){
 }
 function renderTests(){
   $("progress").textContent=completedTests.size+"/12";
-  $("tests").innerHTML=tests.map(t=>{const count=events.filter(e=>e.testId===t.id).length,done=completedTests.has(t.id);return `<button class="${activeId===t.id?"active":""}" data-test="${t.id}" onclick="selectTest(${t.id})"><span class="step ${done?"done":count?"warn":""}">${done?"✓":String(t.id).padStart(2,"0")}</span><span><b>${t.short}</b><small>${done?"Đã hoàn thành":count?count+" lỗi đã ghi nhận":"Chưa có lỗi"}</small></span><i>›</i></button>`}).join("");
+  $("tests").innerHTML=tests.map(t=>{const count=events.filter(e=>e.testId===t.id).length,done=completedTests.has(t.id);return `<button class="${activeId===t.id?"active":""}" data-test="${t.id}"><span class="step ${done?"done":count?"warn":""}">${done?"✓":String(t.id).padStart(2,"0")}</span><span><b>${t.short}</b><small>${done?"Đã hoàn thành":count?count+" lỗi đã ghi nhận":"Chưa có lỗi"}</small></span><i>›</i></button>`}).join("");
 }
 function renderFaults(){
   const t=tests[activeId-1], {terminal}=scoreData();
   $("eyebrow").textContent="BÀI SÁT HẠCH "+String(t.id).padStart(2,"0"); $("title").textContent=t.title; $("hint").textContent=t.hint;
-  $("faults").innerHTML=t.faults.map(f=>`<button ${terminal?"disabled":""} class="${f.terminal?"terminal":""}" data-fault="${f.id}" onclick="recordFault('${f.id}')"><span class="fault-icon">${f.terminal?"!":"−"}</span><span><b>${f.label}</b><small>${f.terminal?"Đình chỉ sát hạch":`Trừ ${f.points} điểm${f.repeat?" / lần":""}`}</small></span><strong>${f.terminal?"DỪNG":"−"+f.points}</strong></button>`).join("");
+  $("faults").innerHTML=t.faults.map(f=>`<button ${terminal?"disabled":""} class="${f.terminal?"terminal":""}" data-fault="${f.id}"><span class="fault-icon">${f.terminal?"!":"−"}</span><span><b>${f.label}</b><small>${f.terminal?"Đình chỉ sát hạch":`Trừ ${f.points} điểm${f.repeat?" / lần":""}`}</small></span><strong>${f.terminal?"DỪNG":"−"+f.points}</strong></button>`).join("");
 }
 function renderLog(){
   $("log").innerHTML=events.length?events.map(e=>`<div class="log-item"><time>${e.at}</time><span><b>Bài ${String(e.testId).padStart(2,"0")}</b>${e.label}</span><strong>${e.terminal?"DỪNG":"−"+e.points}</strong></div>`).join(""):`<div class="empty"><b>✓</b><span>Chưa ghi nhận lỗi</span><small>Các sự kiện sẽ xuất hiện tại đây</small></div>`;
@@ -237,6 +237,10 @@ function renderScore(){
 }
 function render(){renderTests();renderFaults();renderLog();renderScore()}
 function tick(){seconds++;$("timer").textContent=String(Math.floor(seconds/60)).padStart(2,"0")+":"+String(seconds%60).padStart(2,"0")}
+$("start").addEventListener("click",beginExam);
+$("completeTest").addEventListener("click",completeCurrentTest);
+$("tests").addEventListener("click",event=>{const button=event.target.closest("[data-test]");if(button)selectTest(button.dataset.test)});
+$("faults").addEventListener("click",event=>{const button=event.target.closest("[data-fault]");if(button)recordFault(button.dataset.fault)});
 $("reset").onclick=()=>{stopEngine();if("speechSynthesis" in window)speechSynthesis.cancel();clearInterval(timerHandle);activeId=1;events=[];completedTests=new Set();started=false;seconds=0;$("timer").textContent="00:00";$("startCard").hidden=false;$("faultArea").hidden=true;$("showReport").disabled=true;$("candidate").disabled=false;$("license").disabled=false;render()};
 $("clear").onclick=()=>{events=[];render()};
 $("showReport").onclick=()=>{stopEngine();const d=scoreData();$("reportName").textContent=$("candidate").value;$("reportLicense").textContent=$("license").value;$("reportTime").textContent=$("timer").textContent;$("reportScore").textContent=d.score;$("reportStatus").textContent=d.status;$("reportHeading").textContent=`Chi tiết vi phạm (${events.length})`;$("reportList").innerHTML=events.length?events.slice().reverse().map(e=>`<div><span>${e.at} · Bài ${e.testId}</span><b>${e.label}</b><strong>${e.terminal?"Đình chỉ":"−"+e.points}</strong></div>`).join(""):"<p>Không ghi nhận vi phạm.</p>";$("modal").hidden=false};
