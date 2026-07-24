@@ -20,6 +20,252 @@
 .main-panel{background:white;padding:26px 28px;overflow:auto}.panel-head{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:20px;gap:20px}.eyebrow{font-size:9px;letter-spacing:1.4px;color:var(--red);font-weight:900}.panel-head h1{font-family:Georgia,serif;font-size:26px;margin:7px 0 7px;color:#172238}.panel-head p{font-size:11px;line-height:1.5;color:#6c7788;margin:0;max-width:620px}.live{font-size:9px;font-weight:800;letter-spacing:.7px;color:#7f8998;border:1px solid #d7dce3;border-radius:15px;padding:7px 10px;height:max-content;white-space:nowrap}.live span{display:inline-block;width:6px;height:6px;border-radius:50%;background:#98a1ae;margin-right:6px}.live.on{color:var(--red);border-color:#f1b7b3}.live.on span{background:var(--red);box-shadow:0 0 0 3px #d9342b22}
 .start-card{text-align:center;max-width:520px;margin:70px auto}.road-icon{font-size:70px;line-height:1;color:#d9dee5;transform:rotate(90deg)}.start-card h2{font-family:Georgia,serif;font-size:22px;margin:15px 0 8px}.start-card p{font-size:12px;color:#788394}.start-card button{margin-top:18px;background:var(--red);color:white;border:0;border-radius:6px;padding:14px 22px;font-size:11px;font-weight:900;letter-spacing:1px;box-shadow:0 6px 18px #d9342b33}.start-card button span{font-size:17px;margin-left:16px}
 .section-label{display:flex;justify-content:space-between;margin:19px 0 12px}.section-label span{font-size:10px;font-weight:900;letter-spacing:1px}.section-label small{font-size:10px;color:#8a94a3}.fault-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.fault-grid button{min-height:65px;text-align:left;border:1px solid #dfe3e8;background:#fafbfc;border-radius:7px;padding:10px;display:flex;align-items:center;gap:10px}.fault-grid button:hover{border-color:#f1a19c;background:#fffafa;transform:translateY(-1px)}.fault-grid button:disabled{opacity:.5;cursor:not-allowed}.fault-grid .fault-icon{width:29px;height:29px;display:grid;place-items:center;background:#fff0ef;color:var(--red);border-radius:5px;font-size:18px;font-weight:900;flex:none}.fault-grid button b{display:block;font-size:10px;line-height:1.25}.fault-grid button small{display:block;font-size:9px;color:#7e8998;margin-top:4px}.fault-grid button strong{margin-left:auto;color:var(--red);font-size:11px}.fault-grid button.terminal{border-color:#f0b1ad;background:#fff7f6}.fault-grid button.terminal .fault-icon{background:var(--red);color:white}
+.complete-test{width:100%;margin-top:16px;border:0;border-radius:7px;background:var(--green);color:white;padding:13px;font-size:10px;font-weight:900;letter-spacing:1px}.complete-test.done{background:#dfe8e3;color:#287052}.step.done{background:var(--green);color:white}
+.score-panel{background:#f8f9fa;border-left:1px solid var(--line);padding:18px;display:flex;flex-direction:column;overflow:hidden}.score-card{background:var(--navy);color:white;border-radius:8px;padding:18px;text-align:center}.score-card>span{font-size:9px;color:#aab5c4;letter-spacing:1.3px}.score-card>strong{display:block;font-family:Georgia,serif;font-size:63px;line-height:.95;margin-top:10px}.score-card>small{font-size:9px;color:#9faabc;letter-spacing:1px}.meter{height:4px;background:#334057;margin:16px 0 13px;border-radius:3px;overflow:hidden}.meter i{display:block;height:100%;background:#36c987;transition:.3s}.result{display:inline-flex;align-items:center;gap:7px;font-size:10px;font-weight:900;letter-spacing:1px}.result span{width:7px;height:7px;border-radius:50%}.result.pass{color:#41d092}.result.pass span{background:#41d092}.result.fail{color:#ff7c74}.result.fail span{background:#ff5e55}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);background:white;border:1px solid var(--line);border-radius:7px;margin:10px 0;padding:12px 0}.stats div{text-align:center;border-right:1px solid var(--line)}.stats div:last-child{border:0}.stats span{display:block;font-size:7px;color:#8b95a4;letter-spacing:.6px}.stats b{display:block;font-size:16px;margin-top:4px}.stats div:first-child b{color:var(--red)}
+.log-head{display:flex;justify-content:space-between;align-items:center;margin:7px 2px 8px;font-size:9px;font-weight:900;letter-spacing:1px}.log-head button{border:0;background:transparent;color:#8b95a4;font-size:9px}.log{background:white;border:1px solid var(--line);border-radius:7px;flex:1;min-height:130px;overflow:auto}.empty{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#9aa4b1;gap:5px}.empty b{width:27px;height:27px;border:1px solid #d7dce2;border-radius:50%;display:grid;place-items:center}.empty span{font-size:10px;font-weight:700}.empty small{font-size:8px}.log-item{display:grid;grid-template-columns:48px 1fr 40px;gap:6px;padding:10px;border-bottom:1px solid #edf0f3;font-size:9px}.log-item time{color:#8b95a4}.log-item span b{display:block;color:#667387;font-size:8px}.log-item strong{color:var(--red);text-align:right}.report{margin-top:10px;border:0;background:var(--red);color:white;border-radius:6px;padding:12px;font-size:9px;font-weight:900;letter-spacing:.8px}.report:disabled{background:#bec5ce;cursor:not-allowed}
+.modal-backdrop{position:fixed;inset:0;background:#0d1727cc;display:grid;place-items:center;z-index:20;padding:20px}.report-modal{background:white;width:min(720px,100%);max-height:90vh;overflow:auto;border-radius:10px;padding:28px;position:relative}.close{position:absolute;right:18px;top:12px;border:0;background:transparent;font-size:28px;color:#7e8998}.report-modal h2{font-family:Georgia,serif;font-size:25px;margin:7px 0 20px}.report-meta{display:grid;grid-template-columns:2fr 1fr 1fr;border:1px solid var(--line);border-radius:6px}.report-meta div{padding:12px;border-right:1px solid var(--line)}.report-meta div:last-child{border:0}.report-meta span{display:block;font-size:8px;color:#8b95a4;text-transform:uppercase;letter-spacing:1px}.report-meta b{font-size:12px}.report-score{display:flex;align-items:center;justify-content:center;gap:15px;margin:22px;background:#f4f6f8;padding:16px}.report-score>strong{font-family:Georgia,serif;font-size:54px}.report-score span{font-size:9px;color:#7b8696;line-height:1.8}.report-score b{font-size:15px;color:var(--green)}.report-modal h3{font-size:11px;letter-spacing:.8px}.report-list{border:1px solid var(--line);border-radius:6px;max-height:210px;overflow:auto}.report-list div{display:grid;grid-template-columns:120px 1fr 60px;padding:10px;border-bottom:1px solid var(--line);font-size:10px}.report-list div span{color:#7a8595}.report-list div strong{text-align:right;color:var(--red)}.report-list p{padding:10px;color:#7a8595}.report-note{font-size:9px;color:#7d8795;line-height:1.5}.print{border:0;background:var(--navy);color:white;padding:11px 18px;border-radius:5px;font-size:9px;font-weight:900;letter-spacing:1px}
+@media(max-width:1050px){.workspace{grid-template-columns:190px 1fr}.score-panel{grid-column:1/-1;height:420px}.workspace{height:auto}.candidate-bar label:nth-of-type(2){display:none}}@media(max-width:720px){.topbar{padding:0 14px}.system{display:none}.candidate-bar{padding:12px 14px;height:auto;flex-wrap:wrap;gap:12px}.candidate-bar label{min-width:90px}.candidate-bar label:nth-of-type(1){min-width:190px}.workspace{display:block}.sidebar{max-height:210px}.main-panel{padding:20px 15px}.fault-grid{grid-template-columns:1fr}.score-panel{height:500px}.panel-head{display:block}.live{margin-top:12px;display:inline-block}.report-list div{grid-template-columns:90px 1fr 50px}}
+@media print{body>*{visibility:hidden}.modal-backdrop,.modal-backdrop *{visibility:visible}.modal-backdrop{position:absolute;background:white;padding:0}.report-modal{width:100%;max-height:none}.close,.print{display:none}}
+
+.modal-backdrop[hidden]{display:none}.candidate-name{font-weight:700}.workspace{min-height:calc(100vh - 160px)}
+</style>
+</head>
+<body>
+<main>
+  <header class="topbar">
+    <div class="brand"><div class="brandmark">ĐT</div><div><strong>ĐƯỜNG TRƯỜNG</strong><span>HỆ THỐNG GIÁM SÁT &amp; CHẤM ĐIỂM</span></div></div>
+    <div class="system"><span class="pulse"></span> HỆ THỐNG HOẠT ĐỘNG <b id="clock">--:--</b></div>
+  </header>
+  <section class="candidate-bar">
+    <div class="avatar">NA</div>
+    <label><span>THÍ SINH</span><input id="candidate" value="Nguyễn Văn An"></label>
+    <label><span>SỐ BÁO DANH</span><input value="240701-018" readonly></label>
+    <label><span>HẠNG GPLX</span><select id="license"><option>B</option><option>C1</option><option>C</option><option>D1</option><option>D2</option><option>D</option></select></label>
+    <label><span>THỜI GIAN</span><strong class="timer" id="timer">00:00</strong></label>
+    <button class="reset" id="reset">↻ THI LẠI</button>
+  </section>
+  <div class="workspace">
+    <aside class="sidebar"><div class="aside-title"><span>LỘ TRÌNH SÁT HẠCH</span><b id="progress">0/12</b></div><nav id="tests"></nav></aside>
+    <section class="main-panel">
+      <div class="panel-head">
+        <div><span class="eyebrow" id="eyebrow"></span><h1 id="title"></h1><p id="hint"></p></div>
+        <div class="live" id="live"><span></span>CHƯA BẮT ĐẦU</div>
+      </div>
+      <div class="start-card" id="startCard">
+        <div class="road-icon">⌁</div><h2>Sẵn sàng bắt đầu phiên sát hạch</h2>
+        <p>Hệ thống sẽ ghi thời gian và tự động tính điểm ngay khi lỗi được chọn.</p>
+        <button id="start" onclick="beginExam()">BẮT ĐẦU SÁT HẠCH <span>→</span></button>
+      </div>
+      <div id="faultArea" hidden>
+        <div class="section-label"><span>GHI NHẬN LỖI VI PHẠM</span><small>Chọn lỗi ngay khi phát hiện</small></div>
+        <div class="fault-grid" id="faults"></div>
+        <button class="complete-test" id="completeTest" onclick="completeCurrentTest()">✓ HOÀN THÀNH BÀI</button>
+      </div>
+    </section>
+    <aside class="score-panel">
+      <div class="score-card"><span>ĐIỂM HIỆN TẠI</span><strong id="score">100</strong><small>/ 100 ĐIỂM</small><div class="meter"><i id="meter" style="width:100%"></i></div><div class="result pass" id="result"><span></span>ĐẠT</div></div>
+      <div class="stats"><div><span>ĐIỂM ĐÃ TRỪ</span><b id="deduction">−0</b></div><div><span>TỔNG SỐ LỖI</span><b id="totalFaults">0</b></div><div><span>NGƯỠNG ĐẠT</span><b>80</b></div></div>
+      <div class="log-head"><span>NHẬT KÝ SỰ KIỆN</span><button id="clear">Xóa</button></div>
+      <div class="log" id="log"></div>
+      <button class="report" id="showReport" disabled>KẾT THÚC &amp; XEM BIÊN BẢN</button>
+    </aside>
+  </div>
+  <div class="modal-backdrop" id="modal" hidden>
+    <section class="report-modal">
+      <button class="close" id="close">×</button><span class="eyebrow">BIÊN BẢN TỔNG HỢP</span>
+      <h2>Kết quả sát hạch lái xe trên đường</h2>
+      <div class="report-meta"><div><span>Thí sinh</span><b id="reportName"></b></div><div><span>Hạng GPLX</span><b id="reportLicense"></b></div><div><span>Thời gian</span><b id="reportTime"></b></div></div>
+      <div class="report-score"><strong id="reportScore"></strong><span>ĐIỂM<br><b id="reportStatus"></b></span></div>
+      <h3 id="reportHeading"></h3><div class="report-list" id="reportList"></div>
+      <p class="report-note">Mô phỏng theo nội dung kỹ thuật trong tài liệu “Đường trường”. Kết quả dùng cho mục đích đào tạo, không thay thế biên bản sát hạch chính thức.</p>
+      <button class="print" onclick="window.print()">IN BIÊN BẢN</button>
+    </section>
+  </div>
+</main>
+<script>
+const tests = [
+  { id: 1, short: "Xuất phát", title: "Kiểm tra an toàn xe và xuất phát", hint: "Kiểm tra xe, thắt dây an toàn, bật xi nhan trái, nhả phanh đỗ và tăng số trong 15 m.", faults: [
+    {id:"1-1",label:"Không kiểm tra xung quanh xe",points:5},{id:"1-2",label:"Không kiểm tra đèn, còi, phanh, lái, gạt mưa hoặc gương",points:5},{id:"1-3",label:"Tư thế ngồi không phù hợp",points:5},{id:"1-4",label:"Không thắt dây an toàn",points:10},{id:"1-5",label:"Không bật xi nhan trái khi xuất phát",points:10},{id:"1-6",label:"Không nhả hết phanh đỗ",points:5},{id:"1-7",label:"Trong 15 m không tăng số",points:5},{id:"1-8",label:"Xe rung giật mạnh",points:5},{id:"1-9",label:"Không thực hiện kiểm tra an toàn trước xuất phát",points:100,terminal:true},{id:"1-10",label:"Quá 30 giây chưa qua vị trí xuất phát",points:100,terminal:true}]},
+  { id: 2, short: "Vượt xe", title: "Vượt xe", hint: "Quan sát, báo hiệu, nhận tín hiệu cho phép, tăng tốc và vượt với khoảng cách an toàn.", faults: [
+    {id:"2-1",label:"Không báo hiệu bằng đèn hoặc còi",points:5},{id:"2-2",label:"Không bảo đảm khoảng cách an toàn",points:5},{id:"2-3",label:"Vượt khi chưa nhận tín hiệu cho phép",points:5},{id:"2-4",label:"Không quan sát qua gương",points:5},{id:"2-5",label:"Xe rung giật mạnh",points:5},{id:"2-6",label:"Xe chết máy",points:5,repeat:true},{id:"2-7",label:"Động cơ quá 4.000 vòng/phút",points:5,repeat:true},{id:"2-8",label:"Không bật xi nhan trái khi vượt",points:10},{id:"2-9",label:"Không theo hiệu lệnh sát hạch viên",points:100,terminal:true},{id:"2-10",label:"Xử lý gây tai nạn",points:100,terminal:true},{id:"2-11",label:"Choạng lái quá làn khi vượt",points:100,terminal:true}]},
+  { id: 3, short: "Chuyển làn", title: "Tăng tốc, chuyển làn", hint: "Quan sát, phát tín hiệu, tăng tốc phù hợp và chuyển từng làn tại nơi cho phép.", faults: [
+    {id:"3-1",label:"Xe rung giật mạnh",points:5},{id:"3-2",label:"Xe chết máy",points:5,repeat:true},{id:"3-3",label:"Động cơ quá 4.000 vòng/phút",points:5,repeat:true},{id:"3-4",label:"Không quan sát an toàn",points:5},{id:"3-5",label:"Không có tín hiệu trước khi chuyển làn",points:10},{id:"3-6",label:"Chuyển hai làn cùng lúc",points:10},{id:"3-7",label:"Chuyển làn tại nơi không cho phép",points:10},{id:"3-8",label:"Không theo hiệu lệnh sát hạch viên",points:100,terminal:true},{id:"3-9",label:"Xử lý gây tai nạn",points:100,terminal:true},{id:"3-10",label:"Choạng lái quá làn khi tăng, giảm số",points:100,terminal:true}]},
+  { id: 4, short: "Rẽ trái", title: "Chuyển hướng rẽ trái", hint: "Giảm tốc, xi nhan trái, chuyển dần sang làn gần nhất và nhường đường đúng quy định.", faults: [
+    {id:"4-1",label:"Xe rung giật mạnh",points:5},{id:"4-2",label:"Xe chết máy",points:5},{id:"4-3",label:"Không giảm tốc độ an toàn",points:5},{id:"4-4",label:"Không chuyển dần sang làn hướng rẽ",points:10},{id:"4-5",label:"Không bật xi nhan trái",points:10},{id:"4-6",label:"Chuyển hướng đột ngột",points:10},{id:"4-7",label:"Không quan sát đầy đủ",points:10},{id:"4-8",label:"Không nhường người đi bộ/người khuyết tật",points:10},{id:"4-9",label:"Không nhường xe ngược chiều",points:10},{id:"4-10",label:"Lấn làn xe ngược chiều",points:10},{id:"4-11",label:"Không giữ khoảng cách an toàn",points:10},{id:"4-12",label:"Không trả lái về đúng làn",points:10},{id:"4-13",label:"Xử lý gây tai nạn",points:100,terminal:true},{id:"4-14",label:"Không theo hiệu lệnh sát hạch viên",points:100,terminal:true}]},
+  { id: 5, short: "Rẽ phải", title: "Chuyển hướng rẽ phải", hint: "Giảm tốc, xi nhan phải, chuyển dần sang làn gần nhất và quan sát an toàn.", faults: [
+    {id:"5-1",label:"Xe rung giật mạnh",points:5},{id:"5-2",label:"Xe chết máy",points:5,repeat:true},{id:"5-3",label:"Động cơ quá 4.000 vòng/phút",points:5,repeat:true},{id:"5-4",label:"Không giảm tốc độ an toàn",points:5},{id:"5-5",label:"Không chuyển dần sang làn hướng rẽ",points:10},{id:"5-6",label:"Không bật xi nhan phải",points:10},{id:"5-7",label:"Chuyển hướng đột ngột",points:10},{id:"5-8",label:"Không quan sát đầy đủ",points:10},{id:"5-9",label:"Không nhường người đi bộ/người khuyết tật",points:10},{id:"5-10",label:"Không nhường xe ngược chiều",points:10},{id:"5-11",label:"Lấn làn xe ngược chiều",points:10},{id:"5-12",label:"Không giữ khoảng cách an toàn",points:10},{id:"5-13",label:"Không trả lái về đúng làn",points:10},{id:"5-14",label:"Xử lý gây tai nạn",points:100,terminal:true},{id:"5-15",label:"Không theo hiệu lệnh sát hạch viên",points:100,terminal:true}]},
+  { id: 6, short: "Quay đầu", title: "Chuyển hướng quay đầu", hint: "Giảm tốc, quan sát mọi hướng, xi nhan, chuyển làn và chuyển chân ga sang phanh tại điểm quay đầu.", faults: [
+    {id:"6-1",label:"Xe rung giật mạnh",points:5},{id:"6-2",label:"Xe chết máy",points:5,repeat:true},{id:"6-3",label:"Động cơ quá 4.000 vòng/phút",points:5,repeat:true},{id:"6-4",label:"Không giảm tốc độ an toàn",points:5},{id:"6-5",label:"Không bật xi nhan hướng quay đầu",points:10},{id:"6-6",label:"Không quan sát đầy đủ",points:10},{id:"6-7",label:"Không nhường người đi bộ",points:10},{id:"6-8",label:"Không nhường xe ngược chiều",points:10},{id:"6-9",label:"Không giữ khoảng cách an toàn",points:10},{id:"6-10",label:"Gây trở ngại hoặc nguy hiểm",points:10},{id:"6-11",label:"Không trả lái về đúng làn",points:10},{id:"6-12",label:"Xử lý gây tai nạn",points:100,terminal:true},{id:"6-13",label:"Không theo hiệu lệnh sát hạch viên",points:100,terminal:true}]},
+  { id: 7, short: "Tránh xe", title: "Tránh xe đi ngược chiều", hint: "Quan sát, giảm tốc và đi về bên phải theo chiều xe chạy để nhường đường.", faults: [
+    {id:"7-1",label:"Sử dụng tay số không phù hợp",points:5},{id:"7-2",label:"Xe chết máy",points:5,repeat:true},{id:"7-3",label:"Động cơ quá 4.000 vòng/phút",points:5,repeat:true},{id:"7-4",label:"Không quan sát an toàn",points:5},{id:"7-5",label:"Không giảm tốc/chuyển chân ga sang phanh",points:5},{id:"7-6",label:"Xử lý gây tai nạn",points:100,terminal:true},{id:"7-7",label:"Không theo hiệu lệnh sát hạch viên",points:100,terminal:true}]},
+  { id: 8, short: "Người đi bộ", title: "Nhường người đi bộ, xe lăn", hint: "Quan sát, giảm tốc hoặc dừng lại để nhường; không dùng còi hối thúc.", faults: [
+    {id:"8-1",label:"Sử dụng tay số không phù hợp",points:5},{id:"8-2",label:"Xe chết máy",points:5,repeat:true},{id:"8-3",label:"Động cơ quá 4.000 vòng/phút",points:5,repeat:true},{id:"8-5",label:"Không nhường khi đèn xanh nhưng có người qua đường",points:10},{id:"8-6",label:"Không nhường khi đèn vàng nhấp nháy",points:10},{id:"8-7",label:"Không nhường khi chuyển hướng",points:10},{id:"8-8",label:"Không nhường tại vạch/nơi người đang qua",points:10},{id:"8-9",label:"Xử lý gây tai nạn",points:100,terminal:true},{id:"8-10",label:"Không theo hiệu lệnh sát hạch viên",points:100,terminal:true}]},
+  { id: 9, short: "Nguy hiểm", title: "Dừng xe khi gặp tình huống nguy hiểm", hint: "Quan sát, xi nhan phải, giảm tốc từ từ, dừng sát lề; dùng phanh đỗ và đặt cảnh báo sau xe.", faults: [
+    {id:"9-1",label:"Không bật xi nhan phải trước khi dừng",points:5},{id:"9-2",label:"Không giảm hết số",points:5},{id:"9-3",label:"Phanh gây rung giật mạnh",points:5},{id:"9-4",label:"Không sử dụng phanh đỗ",points:5},{id:"9-6",label:"Choạng lái khi vào lề",points:5},{id:"9-7",label:"Không dừng xe",points:100,terminal:true},{id:"9-8",label:"Không đặt cảnh báo sau xe",points:100,terminal:true},{id:"9-9",label:"Xử lý gây tai nạn",points:100,terminal:true},{id:"9-10",label:"Không theo hiệu lệnh sát hạch viên",points:100,terminal:true}]},
+  { id: 10, short: "Đường ưu tiên", title: "Từ đường nhánh ra đường chính", hint: "Giảm tốc, quan sát, xi nhan và nhường xe trên đường ưu tiên trước khi nhập làn.", faults: [
+    {id:"10-1",label:"Xe rung giật mạnh",points:5},{id:"10-2",label:"Không quan sát an toàn",points:10},{id:"10-3",label:"Không bật xi nhan khi nhập đường chính",points:10},{id:"10-4",label:"Không giảm tốc độ",points:10},{id:"10-5",label:"Không nhường xe trên đường ưu tiên",points:10},{id:"10-6",label:"Xử lý gây tai nạn",points:100,terminal:true},{id:"10-7",label:"Không theo hiệu lệnh sát hạch viên",points:100,terminal:true}]},
+  { id: 11, short: "Đèn tín hiệu", title: "Chấp hành tín hiệu đèn giao thông", hint: "Dừng trước vạch khi đèn đỏ, xử lý đèn vàng đúng vị trí và xi nhan khi chuyển hướng.", faults: [
+    {id:"11-1",label:"Xe chết máy",points:5,repeat:true},{id:"11-2",label:"Động cơ quá 4.000 vòng/phút",points:5,repeat:true},{id:"11-3",label:"Dừng quá vạch dừng",points:10},{id:"11-4",label:"Không bật xi nhan khi rẽ",points:10},{id:"11-5",label:"Vượt đèn đỏ",points:100,terminal:true},{id:"11-6",label:"Xử lý gây tai nạn",points:100,terminal:true},{id:"11-7",label:"Không theo hiệu lệnh sát hạch viên",points:100,terminal:true}]},
+  { id: 12, short: "Kết thúc", title: "Mở cửa xe và kết thúc", hint: "Quan sát, giảm số/tốc độ, xi nhan phải, dừng cách lề không quá 0,25 m, kéo phanh tay và mở cửa an toàn.", faults: [
+    {id:"12-1",label:"Không giảm số, giảm tốc độ",points:5},{id:"12-2",label:"Xe chết máy",points:5,repeat:true},{id:"12-3",label:"Động cơ quá 4.000 vòng/phút",points:5,repeat:true},{id:"12-4",label:"Dừng cách lề quá 0,25 m",points:10},{id:"12-5",label:"Không bật xi nhan phải",points:10},{id:"12-6",label:"Xử lý gây tai nạn",points:100,terminal:true},{id:"12-7",label:"Không theo hiệu lệnh sát hạch viên",points:100,terminal:true}]},
+];
+let activeId=1, events=[], completedTests=new Set(), started=false, seconds=0, timerHandle=null;
+let audioContext=null, engineOscillator=null, engineGain=null, enginePulse=null;
+const $=id=>document.getElementById(id);
+const now=()=>new Date().toLocaleTimeString("vi-VN",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
+setInterval(()=>$("clock").textContent=now().slice(0,5),1000);
+function ensureAudio(){
+  const AudioContextClass=window.AudioContext||window.webkitAudioContext;
+  if(!AudioContextClass)return null;
+  if(!audioContext)audioContext=new AudioContextClass();
+  if(audioContext.state==="suspended")audioContext.resume();
+  return audioContext;
+}
+function startEngine(){
+  const ctx=ensureAudio();
+  if(!ctx||engineOscillator)return;
+  engineOscillator=ctx.createOscillator();
+  engineGain=ctx.createGain();
+  engineOscillator.type="sawtooth";
+  engineOscillator.frequency.value=58;
+  engineGain.gain.value=.035;
+  engineOscillator.connect(engineGain);
+  engineGain.connect(ctx.destination);
+  engineOscillator.start();
+  let high=false;
+  enginePulse=setInterval(()=>{
+    if(!engineOscillator)return;
+    high=!high;
+    engineOscillator.frequency.setTargetAtTime(high?66:54,ctx.currentTime,.12);
+    engineGain.gain.setTargetAtTime(high ? .045 : .028,ctx.currentTime,.12);
+  },420);
+}
+function stopEngine(){
+  clearInterval(enginePulse); enginePulse=null;
+  if(engineOscillator){try{engineOscillator.stop()}catch(e){} engineOscillator.disconnect()}
+  if(engineGain)engineGain.disconnect();
+  engineOscillator=null; engineGain=null;
+}
+function announceFault(fault){
+  const ctx=ensureAudio();
+  if(ctx){
+    const osc=ctx.createOscillator(),gain=ctx.createGain();
+    osc.type=fault.terminal?"square":"sine";
+    osc.frequency.setValueAtTime(fault.terminal?220:740,ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(fault.terminal?110:420,ctx.currentTime+.28);
+    gain.gain.setValueAtTime(.14,ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.32);
+    osc.connect(gain); gain.connect(ctx.destination); osc.start(); osc.stop(ctx.currentTime+.33);
+  }
+  if("speechSynthesis" in window){
+    speechSynthesis.cancel();
+    const message=fault.terminal
+      ? `Lỗi ${fault.label}. Đình chỉ sát hạch.`
+      : `Lỗi ${fault.label}. Trừ ${fault.points} điểm.`;
+    const utterance=new SpeechSynthesisUtterance(message);
+    utterance.lang="vi-VN"; utterance.rate=.92; utterance.pitch=1;
+    speechSynthesis.speak(utterance);
+  }
+  if(fault.terminal)stopEngine();
+}
+function speak(text){
+  if(!("speechSynthesis" in window))return;
+  speechSynthesis.cancel();
+  const utterance=new SpeechSynthesisUtterance(text);
+  utterance.lang="vi-VN"; utterance.rate=.92; utterance.pitch=1;
+  speechSynthesis.speak(utterance);
+}
+function selectTest(testId){
+  activeId=Number(testId);
+  const test=tests[activeId-1];
+  speak(`Bài ${activeId}. ${test.title}.`);
+  render();
+}
+function completeCurrentTest(){
+  completedTests.add(activeId);
+  speak(`Hoàn thành bài ${activeId}. ${tests[activeId-1].title}.`);
+  render();
+}
+function beginExam(){
+  started=true;
+  try{startEngine()}catch(e){}
+  $("startCard").hidden=true;
+  $("faultArea").hidden=false;
+  $("showReport").disabled=false;
+  $("candidate").disabled=true;
+  $("license").disabled=true;
+  timerHandle=setInterval(tick,1000);
+  render();
+}
+function recordFault(faultId){
+  const test=tests[activeId-1];
+  const fault=test.faults.find(item=>item.id===faultId);
+  if(!fault)return;
+  try{announceFault(fault)}catch(e){}
+  events.unshift({...fault,testId:activeId,at:now(),eventId:Date.now()});
+  render();
+}
+window.beginExam=beginExam;
+window.recordFault=recordFault;
+window.selectTest=selectTest;
+window.completeCurrentTest=completeCurrentTest;
+function scoreData(){
+  const terminal=events.some(e=>e.terminal);
+  const deduction=events.reduce((s,e)=>s+(e.terminal?0:e.points),0);
+  const score=terminal?0:Math.max(0,100-deduction);
+  return {terminal,deduction,score,status:terminal?"ĐÌNH CHỈ":score>=80?"ĐẠT":"KHÔNG ĐẠT"};
+}
+function renderTests(){
+  $("progress").textContent=completedTests.size+"/12";
+  $("tests").innerHTML=tests.map(t=>{const count=events.filter(e=>e.testId===t.id).length,done=completedTests.has(t.id);return `<button class="${activeId===t.id?"active":""}" data-test="${t.id}" onclick="selectTest(${t.id})"><span class="step ${done?"done":count?"warn":""}">${done?"✓":String(t.id).padStart(2,"0")}</span><span><b>${t.short}</b><small>${done?"Đã hoàn thành":count?count+" lỗi đã ghi nhận":"Chưa có lỗi"}</small></span><i>›</i></button>`}).join("");
+}
+function renderFaults(){
+  const t=tests[activeId-1], {terminal}=scoreData();
+  $("eyebrow").textContent="BÀI SÁT HẠCH "+String(t.id).padStart(2,"0"); $("title").textContent=t.title; $("hint").textContent=t.hint;
+  $("faults").innerHTML=t.faults.map(f=>`<button ${terminal?"disabled":""} class="${f.terminal?"terminal":""}" data-fault="${f.id}" onclick="recordFault('${f.id}')"><span class="fault-icon">${f.terminal?"!":"−"}</span><span><b>${f.label}</b><small>${f.terminal?"Đình chỉ sát hạch":`Trừ ${f.points} điểm${f.repeat?" / lần":""}`}</small></span><strong>${f.terminal?"DỪNG":"−"+f.points}</strong></button>`).join("");
+}
+function renderLog(){
+  $("log").innerHTML=events.length?events.map(e=>`<div class="log-item"><time>${e.at}</time><span><b>Bài ${String(e.testId).padStart(2,"0")}</b>${e.label}</span><strong>${e.terminal?"DỪNG":"−"+e.points}</strong></div>`).join(""):`<div class="empty"><b>✓</b><span>Chưa ghi nhận lỗi</span><small>Các sự kiện sẽ xuất hiện tại đây</small></div>`;
+}
+function renderScore(){
+  const d=scoreData(); $("score").textContent=d.score; $("deduction").textContent="−"+d.deduction; $("totalFaults").textContent=events.length; $("meter").style.width=d.score+"%";
+  $("result").className="result "+(d.status==="ĐẠT"?"pass":"fail"); $("result").innerHTML="<span></span>"+d.status;
+  $("live").className="live "+(started&&!d.terminal?"on":""); $("live").innerHTML="<span></span>"+(started?(d.terminal?"ĐÃ DỪNG":"ĐANG GHI NHẬN"):"CHƯA BẮT ĐẦU");
+  $("completeTest").className="complete-test "+(completedTests.has(activeId)?"done":"");
+  $("completeTest").textContent=completedTests.has(activeId)?"✓ BÀI ĐÃ HOÀN THÀNH":"✓ HOÀN THÀNH BÀI";
+}
+function render(){renderTests();renderFaults();renderLog();renderScore()}
+function tick(){seconds++;$("timer").textContent=String(Math.floor(seconds/60)).padStart(2,"0")+":"+String(seconds%60).padStart(2,"0")}
+$("reset").onclick=()=>{stopEngine();if("speechSynthesis" in window)speechSynthesis.cancel();clearInterval(timerHandle);activeId=1;events=[];completedTests=new Set();started=false;seconds=0;$("timer").textContent="00:00";$("startCard").hidden=false;$("faultArea").hidden=true;$("showReport").disabled=true;$("candidate").disabled=false;$("license").disabled=false;render()};
+$("clear").onclick=()=>{events=[];render()};
+$("showReport").onclick=()=>{stopEngine();const d=scoreData();$("reportName").textContent=$("candidate").value;$("reportLicense").textContent=$("license").value;$("reportTime").textContent=$("timer").textContent;$("reportScore").textContent=d.score;$("reportStatus").textContent=d.status;$("reportHeading").textContent=`Chi tiết vi phạm (${events.length})`;$("reportList").innerHTML=events.length?events.slice().reverse().map(e=>`<div><span>${e.at} · Bài ${e.testId}</span><b>${e.label}</b><strong>${e.terminal?"Đình chỉ":"−"+e.points}</strong></div>`).join(""):"<p>Không ghi nhận vi phạm.</p>";$("modal").hidden=false};
+$("close").onclick=()=>$("modal").hidden=true;$("modal").onclick=e=>{if(e.target===$("modal"))$("modal").hidden=true};
+render();
+</script>
+</body></html>
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101d32">
+<title>Đường Trường — Giả lập chấm điểm sát hạch</title>
+<meta name="description" content="Ứng dụng giả lập chấm điểm tự động 12 bài sát hạch lái xe trên đường.">
+<style>
+
+
+:root{--navy:#101d32;--ink:#182235;--muted:#687386;--line:#dfe4ea;--paper:#f4f6f8;--red:#d9342b;--green:#17865c;--amber:#f2a51a}
+*{box-sizing:border-box}html,body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer}
+.topbar{height:70px;background:var(--navy);color:white;display:flex;align-items:center;justify-content:space-between;padding:0 26px;border-bottom:3px solid #e33b32}
+.brand{display:flex;align-items:center;gap:13px}.brandmark{width:38px;height:38px;border:2px solid white;border-radius:8px;display:grid;place-items:center;font-weight:900;letter-spacing:-2px}.brand strong{display:block;font-size:17px;letter-spacing:1.2px}.brand span{display:block;color:#a9b5c7;font-size:9px;letter-spacing:1.35px;margin-top:3px}
+.system{font-size:10px;letter-spacing:1px;display:flex;align-items:center;gap:8px;color:#cdd5e1}.system b{font-size:18px;margin-left:12px;color:white}.pulse{width:7px;height:7px;border-radius:50%;background:#36d18a;box-shadow:0 0 0 4px #36d18a22}
+.candidate-bar{height:90px;background:white;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 26px;gap:22px}.avatar{width:48px;height:48px;background:#e9edf2;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#42506a}.candidate-bar label{display:flex;flex-direction:column;gap:5px;min-width:130px}.candidate-bar label:nth-of-type(1){min-width:210px}.candidate-bar span{font-size:9px;color:#8590a1;letter-spacing:1px;font-weight:700}.candidate-bar input,.candidate-bar select{border:0;background:transparent;font-weight:700;color:#1c2739;padding:0;outline:none}.timer{font-family:Consolas,monospace;font-size:22px;color:#13223a}.reset{margin-left:auto;background:white;border:1px solid #ccd3dc;border-radius:6px;padding:10px 14px;font-size:10px;font-weight:800;letter-spacing:.7px;color:#4d596b}
+.workspace{display:grid;grid-template-columns:235px minmax(460px,1fr) 330px;height:calc(100vh - 160px);min-height:610px}.sidebar{background:#f8f9fa;border-right:1px solid var(--line);overflow:auto}.aside-title{height:48px;padding:0 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);font-size:9px;letter-spacing:1px;font-weight:800;color:#6f7b8e}.aside-title b{background:#e3e7ec;padding:4px 7px;border-radius:10px;color:#4d596b}
+.sidebar nav button{border:0;border-bottom:1px solid #e9ecf0;background:transparent;width:100%;display:flex;align-items:center;gap:11px;text-align:left;padding:10px 12px;min-height:51px;position:relative}.sidebar nav button:hover{background:#eef1f4}.sidebar nav button.active{background:white;box-shadow:inset 3px 0 var(--red)}.step{width:27px;height:27px;border-radius:50%;background:#e3e7ec;display:grid;place-items:center;font-size:10px;font-weight:800;color:#657086;flex:none}.active .step{background:var(--navy);color:white}.step.warn{background:#fff0d0;color:#a86800}.sidebar nav b{display:block;font-size:11px;color:#283448}.sidebar nav small{display:block;font-size:9px;color:#8a94a3;margin-top:3px}.sidebar nav i{margin-left:auto;color:#9aa3b0;font-style:normal}
+.main-panel{background:white;padding:26px 28px;overflow:auto}.panel-head{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:20px;gap:20px}.eyebrow{font-size:9px;letter-spacing:1.4px;color:var(--red);font-weight:900}.panel-head h1{font-family:Georgia,serif;font-size:26px;margin:7px 0 7px;color:#172238}.panel-head p{font-size:11px;line-height:1.5;color:#6c7788;margin:0;max-width:620px}.live{font-size:9px;font-weight:800;letter-spacing:.7px;color:#7f8998;border:1px solid #d7dce3;border-radius:15px;padding:7px 10px;height:max-content;white-space:nowrap}.live span{display:inline-block;width:6px;height:6px;border-radius:50%;background:#98a1ae;margin-right:6px}.live.on{color:var(--red);border-color:#f1b7b3}.live.on span{background:var(--red);box-shadow:0 0 0 3px #d9342b22}
+.start-card{text-align:center;max-width:520px;margin:70px auto}.road-icon{font-size:70px;line-height:1;color:#d9dee5;transform:rotate(90deg)}.start-card h2{font-family:Georgia,serif;font-size:22px;margin:15px 0 8px}.start-card p{font-size:12px;color:#788394}.start-card button{margin-top:18px;background:var(--red);color:white;border:0;border-radius:6px;padding:14px 22px;font-size:11px;font-weight:900;letter-spacing:1px;box-shadow:0 6px 18px #d9342b33}.start-card button span{font-size:17px;margin-left:16px}
+.section-label{display:flex;justify-content:space-between;margin:19px 0 12px}.section-label span{font-size:10px;font-weight:900;letter-spacing:1px}.section-label small{font-size:10px;color:#8a94a3}.fault-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.fault-grid button{min-height:65px;text-align:left;border:1px solid #dfe3e8;background:#fafbfc;border-radius:7px;padding:10px;display:flex;align-items:center;gap:10px}.fault-grid button:hover{border-color:#f1a19c;background:#fffafa;transform:translateY(-1px)}.fault-grid button:disabled{opacity:.5;cursor:not-allowed}.fault-grid .fault-icon{width:29px;height:29px;display:grid;place-items:center;background:#fff0ef;color:var(--red);border-radius:5px;font-size:18px;font-weight:900;flex:none}.fault-grid button b{display:block;font-size:10px;line-height:1.25}.fault-grid button small{display:block;font-size:9px;color:#7e8998;margin-top:4px}.fault-grid button strong{margin-left:auto;color:var(--red);font-size:11px}.fault-grid button.terminal{border-color:#f0b1ad;background:#fff7f6}.fault-grid button.terminal .fault-icon{background:var(--red);color:white}
 .score-panel{background:#f8f9fa;border-left:1px solid var(--line);padding:18px;display:flex;flex-direction:column;overflow:hidden}.score-card{background:var(--navy);color:white;border-radius:8px;padding:18px;text-align:center}.score-card>span{font-size:9px;color:#aab5c4;letter-spacing:1.3px}.score-card>strong{display:block;font-family:Georgia,serif;font-size:63px;line-height:.95;margin-top:10px}.score-card>small{font-size:9px;color:#9faabc;letter-spacing:1px}.meter{height:4px;background:#334057;margin:16px 0 13px;border-radius:3px;overflow:hidden}.meter i{display:block;height:100%;background:#36c987;transition:.3s}.result{display:inline-flex;align-items:center;gap:7px;font-size:10px;font-weight:900;letter-spacing:1px}.result span{width:7px;height:7px;border-radius:50%}.result.pass{color:#41d092}.result.pass span{background:#41d092}.result.fail{color:#ff7c74}.result.fail span{background:#ff5e55}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);background:white;border:1px solid var(--line);border-radius:7px;margin:10px 0;padding:12px 0}.stats div{text-align:center;border-right:1px solid var(--line)}.stats div:last-child{border:0}.stats span{display:block;font-size:7px;color:#8b95a4;letter-spacing:.6px}.stats b{display:block;font-size:16px;margin-top:4px}.stats div:first-child b{color:var(--red)}
 .log-head{display:flex;justify-content:space-between;align-items:center;margin:7px 2px 8px;font-size:9px;font-weight:900;letter-spacing:1px}.log-head button{border:0;background:transparent;color:#8b95a4;font-size:9px}.log{background:white;border:1px solid var(--line);border-radius:7px;flex:1;min-height:130px;overflow:auto}.empty{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#9aa4b1;gap:5px}.empty b{width:27px;height:27px;border:1px solid #d7dce2;border-radius:50%;display:grid;place-items:center}.empty span{font-size:10px;font-weight:700}.empty small{font-size:8px}.log-item{display:grid;grid-template-columns:48px 1fr 40px;gap:6px;padding:10px;border-bottom:1px solid #edf0f3;font-size:9px}.log-item time{color:#8b95a4}.log-item span b{display:block;color:#667387;font-size:8px}.log-item strong{color:var(--red);text-align:right}.report{margin-top:10px;border:0;background:var(--red);color:white;border-radius:6px;padding:12px;font-size:9px;font-weight:900;letter-spacing:.8px}.report:disabled{background:#bec5ce;cursor:not-allowed}
