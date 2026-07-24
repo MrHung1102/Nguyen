@@ -109,9 +109,64 @@ const tests = [
     {id:"12-1",label:"Không giảm số, giảm tốc độ",points:5},{id:"12-2",label:"Xe chết máy",points:5,repeat:true},{id:"12-3",label:"Động cơ quá 4.000 vòng/phút",points:5,repeat:true},{id:"12-4",label:"Dừng cách lề quá 0,25 m",points:10},{id:"12-5",label:"Không bật xi nhan phải",points:10},{id:"12-6",label:"Xử lý gây tai nạn",points:100,terminal:true},{id:"12-7",label:"Không theo hiệu lệnh sát hạch viên",points:100,terminal:true}]},
 ];
 let activeId=1, events=[], started=false, seconds=0, timerHandle=null;
+let audioContext=null, engineOscillator=null, engineGain=null, enginePulse=null;
 const $=id=>document.getElementById(id);
 const now=()=>new Date().toLocaleTimeString("vi-VN",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
 setInterval(()=>$("clock").textContent=now().slice(0,5),1000);
+function ensureAudio(){
+  const AudioContextClass=window.AudioContext||window.webkitAudioContext;
+  if(!AudioContextClass)return null;
+  if(!audioContext)audioContext=new AudioContextClass();
+  if(audioContext.state==="suspended")audioContext.resume();
+  return audioContext;
+}
+function startEngine(){
+  const ctx=ensureAudio();
+  if(!ctx||engineOscillator)return;
+  engineOscillator=ctx.createOscillator();
+  engineGain=ctx.createGain();
+  engineOscillator.type="sawtooth";
+  engineOscillator.frequency.value=58;
+  engineGain.gain.value=.035;
+  engineOscillator.connect(engineGain);
+  engineGain.connect(ctx.destination);
+  engineOscillator.start();
+  let high=false;
+  enginePulse=setInterval(()=>{
+    if(!engineOscillator)return;
+    high=!high;
+    engineOscillator.frequency.setTargetAtTime(high?66:54,ctx.currentTime,.12);
+    engineGain.gain.setTargetAtTime(high?.045:.028,ctx.currentTime,.12);
+  },420);
+}
+function stopEngine(){
+  clearInterval(enginePulse); enginePulse=null;
+  if(engineOscillator){try{engineOscillator.stop()}catch(e){} engineOscillator.disconnect()}
+  if(engineGain)engineGain.disconnect();
+  engineOscillator=null; engineGain=null;
+}
+function announceFault(fault){
+  const ctx=ensureAudio();
+  if(ctx){
+    const osc=ctx.createOscillator(),gain=ctx.createGain();
+    osc.type=fault.terminal?"square":"sine";
+    osc.frequency.setValueAtTime(fault.terminal?220:740,ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(fault.terminal?110:420,ctx.currentTime+.28);
+    gain.gain.setValueAtTime(.14,ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.32);
+    osc.connect(gain); gain.connect(ctx.destination); osc.start(); osc.stop(ctx.currentTime+.33);
+  }
+  if("speechSynthesis" in window){
+    speechSynthesis.cancel();
+    const message=fault.terminal
+      ? `Lỗi ${fault.label}. Đình chỉ sát hạch.`
+      : `Lỗi ${fault.label}. Trừ ${fault.points} điểm.`;
+    const utterance=new SpeechSynthesisUtterance(message);
+    utterance.lang="vi-VN"; utterance.rate=.92; utterance.pitch=1;
+    speechSynthesis.speak(utterance);
+  }
+  if(fault.terminal)stopEngine();
+}
 function scoreData(){
   const terminal=events.some(e=>e.terminal);
   const deduction=events.reduce((s,e)=>s+(e.terminal?0:e.points),0);
@@ -127,7 +182,7 @@ function renderFaults(){
   const t=tests[activeId-1], {terminal}=scoreData();
   $("eyebrow").textContent="BÀI SÁT HẠCH "+String(t.id).padStart(2,"0"); $("title").textContent=t.title; $("hint").textContent=t.hint;
   $("faults").innerHTML=t.faults.map(f=>`<button ${terminal?"disabled":""} class="${f.terminal?"terminal":""}" data-fault="${f.id}"><span class="fault-icon">${f.terminal?"!":"−"}</span><span><b>${f.label}</b><small>${f.terminal?"Đình chỉ sát hạch":`Trừ ${f.points} điểm${f.repeat?" / lần":""}`}</small></span><strong>${f.terminal?"DỪNG":"−"+f.points}</strong></button>`).join("");
-  document.querySelectorAll("[data-fault]").forEach(b=>b.onclick=()=>{const f=t.faults.find(x=>x.id===b.dataset.fault);events.unshift({...f,testId:activeId,at:now(),eventId:Date.now()});render()});
+  document.querySelectorAll("[data-fault]").forEach(b=>b.onclick=()=>{const f=t.faults.find(x=>x.id===b.dataset.fault);announceFault(f);events.unshift({...f,testId:activeId,at:now(),eventId:Date.now()});render()});
 }
 function renderLog(){
   $("log").innerHTML=events.length?events.map(e=>`<div class="log-item"><time>${e.at}</time><span><b>Bài ${String(e.testId).padStart(2,"0")}</b>${e.label}</span><strong>${e.terminal?"DỪNG":"−"+e.points}</strong></div>`).join(""):`<div class="empty"><b>✓</b><span>Chưa ghi nhận lỗi</span><small>Các sự kiện sẽ xuất hiện tại đây</small></div>`;
@@ -139,10 +194,10 @@ function renderScore(){
 }
 function render(){renderTests();renderFaults();renderLog();renderScore()}
 function tick(){seconds++;$("timer").textContent=String(Math.floor(seconds/60)).padStart(2,"0")+":"+String(seconds%60).padStart(2,"0")}
-$("start").onclick=()=>{started=true;$("startCard").hidden=true;$("faultArea").hidden=false;$("showReport").disabled=false;$("candidate").disabled=true;$("license").disabled=true;timerHandle=setInterval(tick,1000);render()};
-$("reset").onclick=()=>{clearInterval(timerHandle);activeId=1;events=[];started=false;seconds=0;$("timer").textContent="00:00";$("startCard").hidden=false;$("faultArea").hidden=true;$("showReport").disabled=true;$("candidate").disabled=false;$("license").disabled=false;render()};
+$("start").onclick=()=>{started=true;startEngine();$("startCard").hidden=true;$("faultArea").hidden=false;$("showReport").disabled=false;$("candidate").disabled=true;$("license").disabled=true;timerHandle=setInterval(tick,1000);render()};
+$("reset").onclick=()=>{stopEngine();if("speechSynthesis" in window)speechSynthesis.cancel();clearInterval(timerHandle);activeId=1;events=[];started=false;seconds=0;$("timer").textContent="00:00";$("startCard").hidden=false;$("faultArea").hidden=true;$("showReport").disabled=true;$("candidate").disabled=false;$("license").disabled=false;render()};
 $("clear").onclick=()=>{events=[];render()};
-$("showReport").onclick=()=>{const d=scoreData();$("reportName").textContent=$("candidate").value;$("reportLicense").textContent=$("license").value;$("reportTime").textContent=$("timer").textContent;$("reportScore").textContent=d.score;$("reportStatus").textContent=d.status;$("reportHeading").textContent=`Chi tiết vi phạm (${events.length})`;$("reportList").innerHTML=events.length?events.slice().reverse().map(e=>`<div><span>${e.at} · Bài ${e.testId}</span><b>${e.label}</b><strong>${e.terminal?"Đình chỉ":"−"+e.points}</strong></div>`).join(""):"<p>Không ghi nhận vi phạm.</p>";$("modal").hidden=false};
+$("showReport").onclick=()=>{stopEngine();const d=scoreData();$("reportName").textContent=$("candidate").value;$("reportLicense").textContent=$("license").value;$("reportTime").textContent=$("timer").textContent;$("reportScore").textContent=d.score;$("reportStatus").textContent=d.status;$("reportHeading").textContent=`Chi tiết vi phạm (${events.length})`;$("reportList").innerHTML=events.length?events.slice().reverse().map(e=>`<div><span>${e.at} · Bài ${e.testId}</span><b>${e.label}</b><strong>${e.terminal?"Đình chỉ":"−"+e.points}</strong></div>`).join(""):"<p>Không ghi nhận vi phạm.</p>";$("modal").hidden=false};
 $("close").onclick=()=>$("modal").hidden=true;$("modal").onclick=e=>{if(e.target===$("modal"))$("modal").hidden=true};
 render();
 </script>
