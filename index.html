@@ -60,7 +60,7 @@
       <div id="faultArea" hidden>
         <div class="section-label"><span>GHI NHẬN LỖI VI PHẠM</span><small>Chọn lỗi ngay khi phát hiện</small></div>
         <div class="fault-grid" id="faults"></div>
-        <button class="guide-test" id="readGuide">🔊 ĐỌC HƯỚNG DẪN THAO TÁC</button>
+        <button class="guide-test" id="readGuide">🔊 ĐỌC CÁC BƯỚC VÀ YÊU CẦU ĐẠT</button>
         <button class="complete-test" id="completeTest">✓ HOÀN THÀNH BÀI</button>
       </div>
     </section>
@@ -111,8 +111,22 @@ const tests = [
   { id: 12, short: "Kết thúc", title: "Mở cửa xe và kết thúc", hint: "Quan sát, giảm số/tốc độ, xi nhan phải, dừng cách lề không quá 0,25 m, kéo phanh tay và mở cửa an toàn.", faults: [
     {id:"12-1",label:"Không giảm số, giảm tốc độ",points:5},{id:"12-2",label:"Xe chết máy",points:5,repeat:true},{id:"12-3",label:"Động cơ quá 4.000 vòng/phút",points:5,repeat:true},{id:"12-4",label:"Dừng cách lề quá 0,25 m",points:10},{id:"12-5",label:"Không bật xi nhan phải",points:10},{id:"12-6",label:"Xử lý gây tai nạn",points:100,terminal:true},{id:"12-7",label:"Không theo hiệu lệnh sát hạch viên",points:100,terminal:true}]},
 ];
+const requirements = [
+  "Hoàn thành kiểm tra an toàn, thắt dây đúng cách, xuất phát êm, có tín hiệu và tăng số trong phạm vi quy định.",
+  "Vượt xe đúng nơi cho phép, báo hiệu đầy đủ, giữ khoảng cách an toàn và trở về đúng làn.",
+  "Chuyển làn từng làn một, có tín hiệu, quan sát an toàn và không gây cản trở phương tiện khác.",
+  "Rẽ trái đúng làn, đúng tín hiệu, nhường đường đầy đủ và kết thúc chuyển hướng trong làn an toàn.",
+  "Rẽ phải đúng làn, đúng tín hiệu, nhường người đi bộ và giữ xe ổn định trong suốt quá trình.",
+  "Quay đầu tại nơi cho phép, quan sát đủ các hướng, không gây nguy hiểm và trở về đúng phần đường.",
+  "Tránh xe ngược chiều đúng quy tắc, giảm tốc phù hợp, đi sát về bên phải và giữ khoảng cách an toàn.",
+  "Chủ động giảm tốc hoặc dừng để nhường người đi bộ và xe lăn, không dùng còi gây nguy hiểm.",
+  "Dừng xe an toàn, sát lề, bật tín hiệu, dùng phanh đỗ và đặt cảnh báo đúng quy định.",
+  "Nhường toàn bộ xe trên đường ưu tiên, nhập đường chính an toàn, đúng làn và có tín hiệu.",
+  "Chấp hành đúng đèn tín hiệu, dừng trước vạch, không vượt đèn đỏ và báo hướng khi chuyển hướng.",
+  "Dừng xe sát lề không quá 0,25 mét, kéo phanh tay, tắt máy và mở cửa bảo đảm an toàn."
+];
 let activeId=1, events=[], completedTests=new Set(), started=false, seconds=0, timerHandle=null;
-let audioContext=null, engineOscillator=null, engineGain=null, enginePulse=null;
+let audioContext=null;
 const $=id=>document.getElementById(id);
 const now=()=>new Date().toLocaleTimeString("vi-VN",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
 setInterval(()=>$("clock").textContent=now().slice(0,5),1000);
@@ -122,31 +136,6 @@ function ensureAudio(){
   if(!audioContext)audioContext=new AudioContextClass();
   if(audioContext.state==="suspended")audioContext.resume();
   return audioContext;
-}
-function startEngine(){
-  const ctx=ensureAudio();
-  if(!ctx||engineOscillator)return;
-  engineOscillator=ctx.createOscillator();
-  engineGain=ctx.createGain();
-  engineOscillator.type="sawtooth";
-  engineOscillator.frequency.value=58;
-  engineGain.gain.value=.035;
-  engineOscillator.connect(engineGain);
-  engineGain.connect(ctx.destination);
-  engineOscillator.start();
-  let high=false;
-  enginePulse=setInterval(()=>{
-    if(!engineOscillator)return;
-    high=!high;
-    engineOscillator.frequency.setTargetAtTime(high?66:54,ctx.currentTime,.12);
-    engineGain.gain.setTargetAtTime(high ? .045 : .028,ctx.currentTime,.12);
-  },420);
-}
-function stopEngine(){
-  clearInterval(enginePulse); enginePulse=null;
-  if(engineOscillator){try{engineOscillator.stop()}catch(e){} engineOscillator.disconnect()}
-  if(engineGain)engineGain.disconnect();
-  engineOscillator=null; engineGain=null;
 }
 function announceFault(fault){
   const ctx=ensureAudio();
@@ -168,7 +157,6 @@ function announceFault(fault){
     utterance.lang="vi-VN"; utterance.rate=.92; utterance.pitch=1;
     speechSynthesis.speak(utterance);
   }
-  if(fault.terminal)stopEngine();
 }
 function speak(text){
   if(!("speechSynthesis" in window))return;
@@ -185,7 +173,7 @@ function selectTest(testId){
 }
 function readCurrentGuide(){
   const test=tests[activeId-1];
-  speak(`Bài ${activeId}. ${test.title}. Hướng dẫn thực hiện: ${test.hint}`);
+  speak(`Bài ${activeId}. ${test.title}. Các bước thực hiện: ${test.hint} Yêu cầu đạt được: ${requirements[activeId-1]}`);
 }
 function completeCurrentTest(){
   completedTests.add(activeId);
@@ -194,7 +182,6 @@ function completeCurrentTest(){
 }
 function beginExam(){
   started=true;
-  try{startEngine()}catch(e){}
   $("startCard").hidden=true;
   $("faultArea").hidden=false;
   $("showReport").disabled=false;
@@ -248,9 +235,9 @@ $("readGuide").addEventListener("click",readCurrentGuide);
 $("completeTest").addEventListener("click",completeCurrentTest);
 $("tests").addEventListener("click",event=>{const button=event.target.closest("[data-test]");if(button)selectTest(button.dataset.test)});
 $("faults").addEventListener("click",event=>{const button=event.target.closest("[data-fault]");if(button)recordFault(button.dataset.fault)});
-$("reset").onclick=()=>{stopEngine();if("speechSynthesis" in window)speechSynthesis.cancel();clearInterval(timerHandle);activeId=1;events=[];completedTests=new Set();started=false;seconds=0;$("timer").textContent="00:00";$("startCard").hidden=false;$("faultArea").hidden=true;$("showReport").disabled=true;$("candidate").disabled=false;$("license").disabled=false;render()};
+$("reset").onclick=()=>{if("speechSynthesis" in window)speechSynthesis.cancel();clearInterval(timerHandle);activeId=1;events=[];completedTests=new Set();started=false;seconds=0;$("timer").textContent="00:00";$("startCard").hidden=false;$("faultArea").hidden=true;$("showReport").disabled=true;$("candidate").disabled=false;$("license").disabled=false;render()};
 $("clear").onclick=()=>{events=[];render()};
-$("showReport").onclick=()=>{stopEngine();const d=scoreData();$("reportName").textContent=$("candidate").value;$("reportLicense").textContent=$("license").value;$("reportTime").textContent=$("timer").textContent;$("reportScore").textContent=d.score;$("reportStatus").textContent=d.status;$("reportHeading").textContent=`Chi tiết vi phạm (${events.length})`;$("reportList").innerHTML=events.length?events.slice().reverse().map(e=>`<div><span>${e.at} · Bài ${e.testId}</span><b>${e.label}</b><strong>${e.terminal?"Đình chỉ":"−"+e.points}</strong></div>`).join(""):"<p>Không ghi nhận vi phạm.</p>";$("modal").hidden=false};
+$("showReport").onclick=()=>{const d=scoreData();$("reportName").textContent=$("candidate").value;$("reportLicense").textContent=$("license").value;$("reportTime").textContent=$("timer").textContent;$("reportScore").textContent=d.score;$("reportStatus").textContent=d.status;$("reportHeading").textContent=`Chi tiết vi phạm (${events.length})`;$("reportList").innerHTML=events.length?events.slice().reverse().map(e=>`<div><span>${e.at} · Bài ${e.testId}</span><b>${e.label}</b><strong>${e.terminal?"Đình chỉ":"−"+e.points}</strong></div>`).join(""):"<p>Không ghi nhận vi phạm.</p>";$("modal").hidden=false};
 $("close").onclick=()=>$("modal").hidden=true;$("modal").onclick=e=>{if(e.target===$("modal"))$("modal").hidden=true};
 render();
 </script>
