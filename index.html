@@ -111,19 +111,33 @@ const tests = [
   { id: 12, short: "Kết thúc", title: "Mở cửa xe và kết thúc", hint: "Quan sát, giảm số/tốc độ, xi nhan phải, dừng cách lề không quá 0,25 m, kéo phanh tay và mở cửa an toàn.", faults: [
     {id:"12-1",label:"Không giảm số, giảm tốc độ",points:5},{id:"12-2",label:"Xe chết máy",points:5,repeat:true},{id:"12-3",label:"Động cơ quá 4.000 vòng/phút",points:5,repeat:true},{id:"12-4",label:"Dừng cách lề quá 0,25 m",points:10},{id:"12-5",label:"Không bật xi nhan phải",points:10},{id:"12-6",label:"Xử lý gây tai nạn",points:100,terminal:true},{id:"12-7",label:"Không theo hiệu lệnh sát hạch viên",points:100,terminal:true}]},
 ];
+const steps = [
+  "1. Thí sinh phải kiểm tra không gian xung quanh xe, các thiết bị an toàn chính của xe. 2. Điều chỉnh tư thế ngồi trong xe trong trước khi xuất phát. 3. Thí sinh thắt dây an toàn, dừng xe trước vạch xuất phát, chờ hiệu lệnh. 4. Khi có lệnh xuất phát, tiếng loa trên xe báo lệnh xuất phát, bật đèn xi nhan trái, lái xe qua vạch xuất phát. 5. Nhả phanh đỗ trước khi khởi hành. 6. Điều khiển tăng số và lái xe đến bài sát hạch tiếp theo.",
+  "1. Thí sinh thực hiện thao tác vượt xe: quan sát, phát tín hiệu, nhận tín hiệu, tăng tốc, vượt xe. 2. Điều khiển xe đến bài sát hạch tiếp theo.",
+  "1. Thí sinh thực hiện quan sát, phát tín hiệu, tăng tốc độ và chuyển làn. 2. Điều khiển xe đến bài sát hạch tiếp theo.",
+  "1. Thí sinh thực hiện việc quan sát, phát tín hiệu, giảm tốc độ và chuyển hướng xe sang trái. 2. Điều khiển xe đến bài sát hạch tiếp theo.",
+  "1. Thí sinh thực hiện việc quan sát, phát tín hiệu, giảm tốc độ và chuyển hướng xe sang phải. 2. Điều khiển xe đến bài sát hạch tiếp theo.",
+  "1. Thí sinh thực hiện việc quan sát, phát tín hiệu, giảm tốc độ và chuyển hướng quay đầu. 2. Điều khiển xe đến bài sát hạch tiếp theo.",
+  "1. Thí sinh thực hiện các thao tác để quan sát, giảm tốc độ và cho xe đi về bên phải theo chiều xe chạy của mình để nhường đường. 2. Kết thúc quá trình nhường đường, tiếp tục điều khiển xe đến bài sát hạch tiếp theo.",
+  "1. Thí sinh thực hiện các thao tác để quan sát, giảm tốc độ hoặc dừng lại để nhường đường. 2. Kết thúc quá trình nhường đường, tiếp tục điều khiển xe đến bài sát hạch tiếp theo.",
+  "1. Khi có hiệu lệnh kết thúc hoặc yêu cầu dừng xe từ sát hạch viên hoặc hệ thống loa, người điều khiển phải quan sát gương chiếu hậu hoặc ngoái đầu để kiểm tra an toàn phía sau và bên phải. 2. Bật tín hiệu xi nhan phải để báo hiệu xin tấp vào lề. 3. Chủ động rà phanh, giảm tốc độ từ từ và điều khiển xe đi sát vào lề đường bên phải. 4. Dừng xe hoàn toàn đúng vị trí quy định, chống chân giữ thăng bằng xe, giảm hết số, về số N hoặc số 0 nếu là xe số.",
+  "1. Khi đến gần nơi giao nhau có biển báo giao nhau với đường ưu tiên hoặc từ đường nhánh đi ra phải giảm tốc độ hoặc dừng lại nếu cần thiết. 2. Quan sát để đánh giá tình hình giao thông trên đường chính. 3. Bật đèn xi nhan báo hiệu hướng rẽ nếu chuyển hướng. 4. Nhường đường cho xe đi trên đường ưu tiên hoặc đường chính từ bất kỳ hướng nào tới. 5. Khi xác nhận đủ khoảng trống và điều kiện an toàn, mới được tăng ga từ từ để nhập làn vào đường chính.",
+  "1. Chấp hành theo tín hiệu đèn điều khiển giao thông: Đèn tín hiệu màu đỏ phải dừng lại. Đèn tín hiệu màu xanh được phép đi. Đèn tín hiệu màu vàng, nếu trước vạch dừng phải giảm tốc độ và dừng lại, nếu quá vạch dừng thì được phép đi tiếp. 2. Dừng xe trước vạch dừng khi đèn đỏ. 3. Thực hiện theo hiệu lệnh của sát hạch viên: rẽ trái, rẽ phải hoặc đi thẳng. 4. Bật đèn xi nhan khi chuyển hướng. 5. Lái xe đến bài sát hạch tiếp theo.",
+  "1. Khi sát hạch viên ra hiệu lệnh kết thúc bài sát hạch, thí sinh thực hiện thao tác quan sát an toàn lề đường phía trước bên phải và gương chiếu hậu bên phải. 2. Giảm số, giảm tốc độ, bật xi nhan phải và điều khiển xe đi sát vào lề đường. 3. Dừng xe đúng quy định, về số không, kéo phanh tay. 4. Quan sát gương chiếu hậu bên trái, bảo đảm an toàn thì mở hé cửa, quan sát trực tiếp phía sau rồi ra khỏi xe, đóng cửa xe, kết thúc phần sát hạch."
+];
 const requirements = [
-  "Hoàn thành kiểm tra an toàn, thắt dây đúng cách, xuất phát êm, có tín hiệu và tăng số trong phạm vi quy định.",
-  "Vượt xe đúng nơi cho phép, báo hiệu đầy đủ, giữ khoảng cách an toàn và trở về đúng làn.",
-  "Chuyển làn từng làn một, có tín hiệu, quan sát an toàn và không gây cản trở phương tiện khác.",
-  "Rẽ trái đúng làn, đúng tín hiệu, nhường đường đầy đủ và kết thúc chuyển hướng trong làn an toàn.",
-  "Rẽ phải đúng làn, đúng tín hiệu, nhường người đi bộ và giữ xe ổn định trong suốt quá trình.",
-  "Quay đầu tại nơi cho phép, quan sát đủ các hướng, không gây nguy hiểm và trở về đúng phần đường.",
-  "Tránh xe ngược chiều đúng quy tắc, giảm tốc phù hợp, đi sát về bên phải và giữ khoảng cách an toàn.",
-  "Chủ động giảm tốc hoặc dừng để nhường người đi bộ và xe lăn, không dùng còi gây nguy hiểm.",
-  "Dừng xe an toàn, sát lề, bật tín hiệu, dùng phanh đỗ và đặt cảnh báo đúng quy định.",
-  "Nhường toàn bộ xe trên đường ưu tiên, nhập đường chính an toàn, đúng làn và có tín hiệu.",
-  "Chấp hành đúng đèn tín hiệu, dừng trước vạch, không vượt đèn đỏ và báo hướng khi chuyển hướng.",
-  "Dừng xe sát lề không quá 0,25 mét, kéo phanh tay, tắt máy và mở cửa bảo đảm an toàn."
+  "1. Kiểm tra điểm mù xung quanh xe và các yếu tố an toàn khác trước khi xuất phát; đi một vòng quanh xe, quan sát gầm xe, bánh xe. 2. Kiểm tra hệ thống đèn, còi, gạt mưa, kiểm tra hệ thống phanh, hệ thống lái. 3. Kiểm tra các vật dụng cứu hộ trên xe. 4. Quan sát hệ thống bảng thông báo hiển thị trên xe. 5. Điều chỉnh tư thế ngồi đảm bảo thuận tiện trong việc sử dụng vô lăng, chân ga, chân phanh, chân côn nếu có. 6. Kiểm tra tầm nhìn của gương chiếu hậu phía bên trái, phía bên phải và trong xe. 7. Thắt dây an toàn trước khi xuất phát. 8. Bật đèn xi nhan trái trước khi xuất phát. 9. Nhả phanh đỗ trước khi khởi hành, xe không bị rung giật mạnh và lùi về phía sau quá 500 mi-li-mét. 10. Trong khoảng 15 mét phải tăng số. 11. Giữ động cơ hoạt động liên tục.",
+  "1. Báo hiệu nhấp nháy bằng đèn chiếu sáng phía trước hoặc còi, bật đèn xi nhan trái trước khi vượt. 2. Bảo đảm khoảng cách an toàn với xe phía trước, phía sau và hai bên. 3. Quan sát an toàn hai bên, phía trước, phía sau qua gương chiếu hậu. 4. Giữ cho động cơ hoạt động liên tục. 5. Không để xe bị rung giật mạnh. 6. Không gây mất an toàn. 7. Không để xe bị choạng lái quá làn đường.",
+  "1. Quan sát an toàn, phát tín hiệu, tăng tốc phù hợp và chuyển làn. 2. Giữ động cơ hoạt động liên tục. 3. Giữ tốc độ động cơ không quá 4000 vòng trên phút. 4. Sử dụng tay số phù hợp với tốc độ. 5. Thực hiện các yêu cầu theo thông báo của loa trên xe sát hạch và hiệu lệnh của sát hạch viên. 6. Lái xe an toàn và không bị choạng lái quá làn đường quy định. 7. Chuyển làn đảm bảo an toàn.",
+  "1. Quan sát hai bên, phía trước, phía sau qua gương chiếu hậu các hướng trước khi chuyển hướng xe. 2. Giảm tốc độ, bật đèn xi nhan trái, quan sát gương chiếu hậu bên trái, chuyển dần sang làn gần nhất hướng rẽ. 3. Giữ khoảng cách an toàn với xe phía trước, phía sau. 4. Trong quá trình chuyển hướng giữ xe hoạt động liên tục và không để xe bị rung giật mạnh. 5. Thực hiện việc nhường đường cho người đi bộ, xe lăn của người khuyết tật và các phương tiện thô sơ và xe đi theo hướng ngược lại.",
+  "1. Quan sát hai bên, phía trước, phía sau qua gương chiếu hậu, các hướng trước khi chuyển hướng xe. 2. Giảm tốc độ, bật đèn xi nhan phải, quan sát gương chiếu hậu bên phải, chuyển dần sang làn gần nhất hướng rẽ. 3. Giữ khoảng cách an toàn với xe phía trước, phía sau. 4. Trong quá trình chuyển hướng để xe hoạt động liên tục và không để xe bị rung giật mạnh. 5. Thực hiện việc nhường đường cho người đi bộ, xe lăn của người khuyết tật và các phương tiện thô sơ và xe đi theo hướng ngược lại.",
+  "1. Giảm tốc độ xe về mức an toàn trước khi thực hiện thao tác quay đầu xe. 2. Quan sát an toàn hai bên, phía trước, phía sau qua gương chiếu hậu. Bật đèn xi nhan về hướng quay đầu xe. 3. Giữ khoảng cách an toàn với xe phía trước, phía sau. 4. Chuyển dần sang làn đường gần nhất với hướng quay đầu. 5. Trong quá trình quay đầu để xe hoạt động liên tục và không bị rung giật mạnh. 6. Thực hiện việc nhường đường cho người đi bộ, xe lăn của người khuyết tật hoặc các phương tiện đang di chuyển chiều ngược lại nếu có. 7. Phải có thao tác chuyển chân ga sang chân phanh tại điểm quay đầu.",
+  "1. Giữ động cơ hoạt động liên tục. 2. Giữ tốc độ động cơ không quá 4000 vòng trên phút. 3. Không để xảy ra tình huống nguy hiểm trong quá trình tránh xe. 4. Tránh xe theo đúng quy tắc giao thông.",
+  "1. Giữ động cơ hoạt động liên tục. 2. Giữ tốc độ động cơ không quá 4000 vòng trên phút. 3. Phải nhường đường và không để xảy ra tình huống nguy hiểm trong quá trình nhường đường. 4. Không được sử dụng còi để hối thúc người đi bộ, xe lăn của người khuyết tật.",
+  "1. Bắt buộc phải bật đèn xi nhan phải trước khi dừng xe và trong khoảng cách quy định. 2. Dừng xe đúng vị trí, sát lề đường bên phải, sử dụng phanh đỗ, bật đèn cảnh báo nguy hiểm. 3. Thiết bị cảm biến phanh và tốc độ ghi nhận quá trình giảm tốc độ, không phanh gấp gây rung giật. 4. Mở cửa xuống xe, đặt cảnh báo phía sau xe, khoảng cách tối thiểu 20 mét.",
+  "1. Giảm tốc độ xe về mức an toàn trước khi thực hiện thao tác nhập làn. 2. Quan sát an toàn hai bên, phía trước, phía sau qua gương chiếu hậu. 3. Giữ khoảng cách an toàn với xe phía sau. 4. Xe hoạt động liên tục và không bị rung giật mạnh. 5. Thực hiện việc nhường đường cho xe đi trên đường ưu tiên hoặc đường chính từ bất kỳ hướng nào tới.",
+  "1. Chấp hành theo tín hiệu đèn điều khiển giao thông. 2. Dừng xe trước vạch dừng khi đèn đỏ. 3. Bật đèn xi nhan về hướng muốn rẽ, quan sát an toàn tại tất cả các hướng ở giao lộ, quan sát an toàn gương chiếu hậu. 4. Lái xe qua ngã tư không vi phạm quy tắc giao thông đường bộ. 5. Giữ động cơ hoạt động liên tục. Giữ tốc độ động cơ không quá 4000 vòng trên phút.",
+  "1. Quan sát an toàn trực tiếp và qua gương chiếu hậu. 2. Giảm số giảm tốc độ. 3. Bật xi nhan phải. 4. Dừng xe sát lề đường, không quá 0,25 mét. 5. Giữ động cơ hoạt động liên tục. 6. Giữ tốc độ động cơ không quá 4000 vòng trên phút."
 ];
 let activeId=1, events=[], completedTests=new Set(), started=false, seconds=0, timerHandle=null;
 let audioContext=null;
@@ -173,7 +187,7 @@ function selectTest(testId){
 }
 function readCurrentGuide(){
   const test=tests[activeId-1];
-  speak(`Bài ${activeId}. ${test.title}. Các bước thực hiện: ${test.hint} Yêu cầu đạt được: ${requirements[activeId-1]}`);
+  speak(`Bài ${activeId}. ${test.title}. Các bước thực hiện: ${steps[activeId-1]} Yêu cầu đạt được: ${requirements[activeId-1]}`);
 }
 function completeCurrentTest(){
   completedTests.add(activeId);
